@@ -25,7 +25,7 @@ jobs:
         include:
         - os: windows-latest
           file: windows.Dockerfile
-          tag: ${{ env.REGISTRY }}/${{ github.repository_owner }}/zk-builder-win:latest
+          tag: zk-builder-win:latest
 
     steps:
     - name: Checkout
@@ -41,7 +41,8 @@ jobs:
 
     - name: Docker Build
       run: |
-        docker build -f ${{ matrix.file }} -t ${{ matrix.tag }} -m 2GB .
+        docker build -f ${{ matrix.file }} -t ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ matrix.tag }} -m 2GB .
 
     - name: Docker Push
-      run: docker push ${{ matrix.tag }}
+      run: |
+        docker push ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ matrix.tag }}
