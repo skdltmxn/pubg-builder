@@ -21,11 +21,11 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-2016]
+        os: [windows-latest]
         include:
-        - os: windows-2016
+        - os: windows-latest
           file: windows.Dockerfile
-          tag: zk-builder-win:latest
+          tag: ${{ env.REGISTRY }}/${{ github.repository_owner }}/zk-builder-win:latest
 
     steps:
     - name: Checkout
@@ -44,4 +44,4 @@ jobs:
         docker build -f ${{ matrix.file }} -t ${{ matrix.tag }} -m 2GB .
 
     - name: Docker Push
-      run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ matrix.tag }}
+      run: docker push ${{ matrix.tag }}
