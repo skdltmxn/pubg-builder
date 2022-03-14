@@ -21,6 +21,7 @@ jobs:
         - os: windows-2016
           file: windows.Dockerfile
           tag: zk-builder-win:latest
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -38,4 +39,4 @@ jobs:
         docker build -f ${{ matrix.file }} -t ${{ matrix.tag }} -m 2GB .
 
     - name: Docker Push
-      run: docker push
+      run: docker push ${{ IMAGE_NAME }}:${{ matrix:tag }}
