@@ -20,7 +20,7 @@ jobs:
         include:
         - os: windows-2016
           file: windows.Dockerfile
-          tag: zk-builder-win:latest
+          tag: zk-builder-win
 
     steps:
     - name: Checkout
@@ -36,7 +36,7 @@ jobs:
 
     - name: Docker Build
       run: |
-        docker build -f ${{ matrix.file }} -t ${{ matrix.tag }} -m 2GB .
+        docker build -f ${{ matrix.file }} -t ${{ matrix.tag }}:latest -m 2GB .
 
     - name: Docker Push
       run: docker push ${{ env.IMAGE_NAME }}:${{ matrix.tag }}
