@@ -41,7 +41,7 @@ jobs:
 
     - name: Docker Build
       run: |
-        docker build -f ${{ matrix.file }} -t ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ matrix.tag }} -m 2GB .
+        docker build -f ${{ matrix.file }} -t ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ matrix.tag }} -m 2GB --isolation=hyperv .
 
     - name: Docker Push
       run: |
